@@ -398,26 +398,33 @@ footer {
 .galeria-proyectos .marco-imagen {
     min-height: 140px;
 }
-/* Corrección para íconos de redes en móvil */
+
 .redes-sociales {
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
     flex-wrap: wrap !important;
     gap: 15px !important;
-    margin-top: 20px !important;
+    margin: 25px 0 !important;
 }
 
-.icono-red {
+.redes-sociales a.icono-red {
     display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
     width: 50px !important;
     height: 50px !important;
-    background: rgba(0, 255, 102, 0.1) !important;
-    border: 1px solid #00ff66 !important;
+    background-color: rgba(0, 255, 102, 0.15) !important;
+    border: 2px solid #00ff66 !important;
     border-radius: 50% !important;
     color: #00ff66 !important;
-    font-size: 1.5rem !important;
+    align-items: center !important;
+    justify-content: center !important;
     text-decoration: none !important;
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.3) !important;
+}
+
+.redes-sociales a.icono-red i {
+    font-size: 1.4rem !important;
+    color: #00ff66 !important;
+    visibility: visible !important;
+    display: inline-block !important;
 }
