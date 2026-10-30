@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio | Axel Ditlevsen</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Fondo Matrix con canvas -->
+    <canvas id="matrix-canvas"></canvas>
+
+    <!-- Fondo de burbujas flotantes en caída -->
+    <div class="background-animation" aria-hidden="true">
+        <div class="burbuja"><span>Intentalo</span></div>
+        <div class="burbuja"><span>Se mejor</span></div>
+        <div class="burbuja"><span>Tu puedes</span></div>
+        <div class="burbuja"><span>No te rindas</span></div>
+        <div class="burbuja"><span>Llegaras lejos</span></div>
+    </div>
+
+    <header>
+        <img src="foto.jpg" alt="Axel Ditlevsen" class="foto-perfil">
+        <h1>Axel Ditlevsen</h1>
+        <p class="subtitulo">&gt; Estudiante de Programación_</p>
+    </header>
+
+    <nav>
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#conocimientos">Conocimientos</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+
+    <main class="contenedor-principal">
+        
+        <section id="sobre-mi" class="tarjeta">
+            <h2>Sobre mí</h2>
+            <p>Soy Axel Ditlevsen. Actual estudiante de programación de la Universidad Tecnológica Nacional (UTN) y, como la universidad, soy originario de Argentina. Domino algunos idiomas, como el inglés, el español, y también algo de portugués.</p>
+            <p>Mi curiosidad por el mundo no tiene límite ni frontera alguna, siempre estoy dispuesto a aprender algo nuevo y ganar experiencia en alguna tarea u proyecto. Busco mejorar mis habilidades y superar mis limites.</p>
+            <p class="frase"><em>"La única carrera que debemos de correr, es contra nosotros mismos, de ser posible, y si se puede, se debe intentar ser mejor que ayer"</em></p>
+        </section>
+
+        <section id="conocimientos" class="tarjeta">
+            <h2>Conocimientos</h2>
+            <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">Java</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">C++</span>
+                <span class="tag">C#</span>
+                <span class="tag">HTML</span>
+            </div>
+        </section>
+
+        <!--espacio intermedio-->
+        <div class="espacio-intermedio">
+            <div class="marco-imagen">
+                <img src="proyecto2.jpg" alt="proyecto2">
+                <p class="placeholder-texto"></p>
+            </div>
+        </div>
+
+        <section id="proyectos" class="tarjeta">
+            <h2>Proyectos</h2>
+            <ul>
+                <li><strong>Juego de azar:</strong> Blackjack en PSeInt y en Java.</li>
+                <li><strong>Juego de texto (RPG):</strong> Funcional en C++.</li>
+                <li><strong>Sistema de gestión:</strong> Inventario en C++.</li>
+                <li><strong>Videojuegos 3D:</strong> En desarrollo utilizando Unreal Engine 5.</li>
+            </ul>
+        </section>
+
+        <!-- SECCIÓN DE LOS 4 NUEVOS ESPACIOS PARA FOTOS DE PROYECTOS -->
+        <section class="tarjeta">
+            <h2>Galería de Proyectos</h2>
+            <p>Algunas capturas y muestras visuales de los desarrollos:</p>
+            
+            <div class="galeria-proyectos">
+                <div class="marco-imagen">
+                
+                    <img src="blackjack.jpg" alt="Blackjack">
+                </div>
+                <div class="marco-imagen">
+                    <img src="juegorpg.jpg" alt="RPG C++"> 
+                </div>
+                <div class="marco-imagen">
+                    <img src="imagendeprueba.jpg" alt="Inventario">
+                </div>
+                <div class="marco-imagen">
+                    
+                    <img src="IN.jpg" alt="Unreal Engine">
+                
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="tarjeta">
+            <h2>Contacto</h2>
+            <p>Haz clic en cualquiera de los botones para escribirme o ver mis perfiles:</p>
+            <div class="redes-sociales">
+                <a href="https://www.instagram.com/axel_ditlevsen.02/" target="_blank" class="icono-red instagram" title="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100093481729399" target="_blank" class="icono-red facebook" title="Facebook">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+                <a href="https://github.com/axelgty008" target="_blank" class="icono-red github" title="GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="mailto:axelgty008@gmail.com" class="icono-red gmail" title="Enviar Email">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Axel Ditlevsen - Skynet Ent.</p>
+    </footer>
+
+    <!-- Script para la lluvia de letras estilo Matrix -->
+    <script>
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*<>/';
+        const fontSize = 16;
+        const columnSpacing = 19; 
+        const columns = Math.floor(canvas.width / columnSpacing);
+        const drops = Array(columns).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(10, 10, 10, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = 'rgba(139, 0, 0, 0.35)';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars.charAt(Math.floor(Math.random() * chars.length));
+                const x = i * columnSpacing;
+                const y = drops[i] * fontSize;
+
+                ctx.fillText(text, x, y);
+
+                if (y > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 45);
+    </script>
+</body>
+</html>
